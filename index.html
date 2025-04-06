@@ -707,24 +707,39 @@
     </section>
 
     <!-- CTA форма -->
-    <section class="cta-section" id="contact">
+   <section class="cta-section" id="contact">
         <div class="container">
             <h2>Готовы навести порядок в заказах?</h2>
             <p>Оставьте заявку и получите 14 дней бесплатного доступа к CRM.</p>
             <div class="cta-form" id="form">
-                <div class="form-group">
-                    <label for="name">Ваше имя</label>
-                    <input type="text" id="name" placeholder="Иван Иванов" required>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" id="email" placeholder="ivan@example.com" required>
-                </div>
-                <div class="form-group">
-                    <label for="phone">Телефон</label>
-                    <input type="tel" id="phone" placeholder="+7 (999) 123-45-67" required>
-                </div>
-                <button type="submit" class="submit-button">Попробовать бесплатно</button>
+                <form action="https://formsubmit.co/hitryievrei@gmail.com" method="POST">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="Новая заявка с лендинга Cleango!">
+                    <input type="hidden" name="_template" value="table">
+                    
+                    <div class="form-group">
+                        <label for="name">Ваше имя*</label>
+                        <input type="text" id="name" name="name" placeholder="Иван Иванов" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email*</label>
+                        <input type="email" id="email" name="email" placeholder="ivan@example.com" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Телефон*</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+7 (999) 123-45-67" required>
+                    </div>
+                    
+                    <!-- Новое необязательное поле -->
+                    <div class="form-group">
+                        <label for="business">Укажите, что у вас за бизнес (необязательно)</label>
+                        <input type="text" id="business" name="business" placeholder="Например: клининговая компания, ремонт квартир">
+                    </div>
+                    
+                    <button type="submit" class="submit-button">Попробовать бесплатно</button>
+                </form>
             </div>
         </div>
     </section>
