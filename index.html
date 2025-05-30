@@ -1,818 +1,359 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cleango — CRM для клининга и услуг</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --primary: #6366F1;
-            --primary-dark: #4F46E5;
-            --gradient: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
-            --dark: #1F2937;
-            --light: #F9FAFB;
-            --gray: #6B7280;
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--dark);
-            line-height: 1.6;
-            background-color: var(--light);
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-        
-        /* Шапка */
-        header {
-            background: white;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-        
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 0;
-        }
-        
-        .logo {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .logo-circle {
-            width: 30px;
-            height: 30px;
-            background: var(--gradient);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: bold;
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: 30px;
-        }
-        
-        .nav-links a {
-            text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-        
-        /* Герой */
-        .hero {
-            padding: 80px 0;
-            background: white;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero-content {
-            max-width: 600px;
-            position: relative;
-            z-index: 2;
-        }
-        
-        .hero h1 {
-            font-size: 48px;
-            font-weight: 700;
-            line-height: 1.2;
-            margin-bottom: 20px;
-            background: var(--gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-        
-        .hero p {
-            font-size: 18px;
-            color: var(--gray);
-            margin-bottom: 40px;
-        }
-        
-        .cta-button {
-            display: inline-block;
-            padding: 16px 32px;
-            background: var(--gradient);
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
-        }
-        
-        .cta-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
-        }
-        
-        .hero-image {
-            position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 50%;
-            max-width: 600px;
-            border-radius: 20px;
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
-            animation: float 6s ease-in-out infinite;
-        }
-        
-        @keyframes float {
-            0% { transform: translateY(-50%) translateX(0); }
-            50% { transform: translateY(-50%) translateX(10px); }
-            100% { transform: translateY(-50%) translateX(0); }
-        }
-        
-        /* Преимущества */
-        .benefits {
-            padding: 80px 0;
-            background: white;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 60px;
-            color: var(--dark);
-        }
-        
-        .benefits-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-        }
-        
-        .benefit-card {
-            background: white;
-            border-radius: 16px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-        }
-        
-        .benefit-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-        }
-        
-        .benefit-icon {
-            width: 60px;
-            height: 60px;
-            background: rgba(99, 102, 241, 0.1);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-        
-        .benefit-icon svg {
-            width: 30px;
-            height: 30px;
-            color: var(--primary);
-        }
-        
-        .benefit-card h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-        
-        .benefit-card p {
-            color: var(--gray);
-            line-height: 1.7;
-        }
-        
-        /* Как это работает */
-        .how-it-works {
-            padding: 80px 0;
-            background: #F9FAFB;
-        }
-        
-        .steps {
-            display: flex;
-            flex-direction: column;
-            gap: 40px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        
-        .step {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-            position: relative;
-        }
-        
-        .step-number {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: 20px;
-            flex-shrink: 0;
-        }
-        
-        .step-content {
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            flex-grow: 1;
-        }
-        
-        .step h3 {
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 15px;
-            color: var(--dark);
-        }
-        
-        .step p {
-            color: var(--gray);
-            line-height: 1.7;
-        }
-        
-        /* Тарифы */
-        .pricing {
-            padding: 80px 0;
-            background: white;
-        }
-        
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-        
-        .pricing-card {
-            background: white;
-            border-radius: 16px;
-            padding: 40px 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .pricing-card.popular {
-            border: 2px solid var(--primary);
-        }
-        
-        .popular-badge {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: var(--primary);
-            color: white;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-        
-        .pricing-card h3 {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: var(--dark);
-        }
-        
-        .price {
-            font-size: 48px;
-            font-weight: 700;
-            margin: 20px 0;
-            color: var(--dark);
-        }
-        
-        .price span {
-            font-size: 16px;
-            font-weight: 500;
-            color: var(--gray);
-        }
-        
-        .pricing-features {
-            margin-bottom: 30px;
-        }
-        
-        .pricing-features li {
-            list-style: none;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--gray);
-        }
-        
-        .pricing-features li svg {
-            width: 18px;
-            height: 18px;
-            color: var(--primary);
-        }
-        
-        /* Форма */
-        .cta-section {
-            padding: 80px 0;
-            background: var(--gradient);
-            color: white;
-            text-align: center;
-        }
-        
-        .cta-section h2 {
-            font-size: 36px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-        
-        .cta-section p {
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            opacity: 0.9;
-        }
-        
-        .cta-form {
-            max-width: 500px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 16px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            color: var(--dark);
-        }
-        
-        .form-group input {
-            width: 100%;
-            padding: 15px;
-            border: 1px solid #E5E7EB;
-            border-radius: 8px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-        }
-        
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-        }
-        
-        .submit-button {
-            width: 100%;
-            padding: 16px;
-            background: var(--gradient);
-            color: white;
-            border: none;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            margin-top: 10px;
-        }
-        
-        .submit-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(99, 102, 241, 0.4);
-        }
-        
-        /* Подвал */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 50px 0 20px;
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-        
-        .footer-column h3 {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: white;
-        }
-        
-        .footer-column ul {
-            list-style: none;
-        }
-        
-        .footer-column ul li {
-            margin-bottom: 10px;
-        }
-        
-        .footer-column ul li a {
-            color: #D1D5DB;
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-        
-        .footer-column ul li a:hover {
-            color: white;
-        }
-        
-        .copyright {
-            text-align: center;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            color: #9CA3AF;
-            font-size: 14px;
-        }
-        
-        /* Адаптивность */
-        @media (max-width: 1024px) {
-            .hero-image {
-                opacity: 0.3;
-                right: -100px;
-            }
-            
-            .hero-content {
-                max-width: 100%;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 36px;
-            }
-            
-            .section-title {
-                font-size: 28px;
-            }
-            
-            .step {
-                flex-direction: column;
-                text-align: center;
-            }
-            
-            .step-number {
-                margin-bottom: 20px;
-            }
-            
-            .nav-links {
-                display: none;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 28px;
-            }
-            
-            .hero p {
-                font-size: 16px;
-            }
-            
-            .benefits-grid, .pricing-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .pricing-card {
-                padding: 30px 20px;
-            }
-            
-            .price {
-                font-size: 36px;
-            }
-        }
-
-        /* Добавляем стили для страницы благодарности */
-        .thank-you-page {
-            text-align: center;
-            padding: 100px 20px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .thank-you-icon {
-            font-size: 80px;
-            color: #4CAF50;
-            margin-bottom: 30px;
-        }
-        .thank-you-title {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #333;
-        }
-        .thank-you-text {
-            font-size: 18px;
-            color: #666;
-            margin-bottom: 40px;
-            line-height: 1.6;
-        }
-        .back-button {
-            display: inline-block;
-            padding: 12px 24px;
-            background: #6366F1;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        .back-button:hover {
-            background: #4F46E5;
-            transform: translateY(-2px);
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>D&D с ИИ-мастером | Играйте без ведущего</title>
+  <style>
+    :root {
+      --primary: #6a35ff;
+      --secondary: #ff6b6b;
+      --dark: #2d3436;
+      --light: #f5f6fa;
+      --white: #ffffff;
+    }
+    
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: var(--dark);
+      line-height: 1.6;
+      background-color: #f9f9f9;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    
+    /* Hero section */
+    .hero {
+      background: linear-gradient(135deg, var(--primary), #4b15e0);
+      color: var(--white);
+      padding: 100px 0;
+      text-align: center;
+    }
+    
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      line-height: 1.2;
+    }
+    
+    .hero p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto 40px;
+      opacity: 0.9;
+    }
+    
+    .cta-button {
+      background-color: var(--secondary);
+      color: var(--white);
+      border: none;
+      padding: 15px 30px;
+      font-size: 1.1rem;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 600;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      display: inline-block;
+      text-decoration: none !important;
+    }
+    
+    .cta-button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      background-color: #ff5252;
+      text-decoration: none;
+    }
+    
+    /* Features */
+    .features {
+      padding: 100px 0;
+      text-align: center;
+    }
+    
+    .features h2 {
+      font-size: 2.5rem;
+      margin-bottom: 60px;
+      color: var(--dark);
+    }
+    
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+    }
+    
+    .feature-card {
+      padding: 30px;
+      border-radius: 10px;
+      background: var(--white);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: all 0.3s ease;
+    }
+    
+    .feature-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+    }
+    
+    .feature-card h3 {
+      font-size: 1.5rem;
+      margin: 20px 0;
+      color: var(--primary);
+    }
+    
+    .feature-icon {
+      font-size: 3rem;
+      color: var(--primary);
+    }
+    
+    /* Signup Form */
+    .signup-section {
+      padding: 80px 0;
+      background: linear-gradient(135deg, #f5f7fa, #e4e8eb);
+      text-align: center;
+    }
+    
+    .signup-container {
+      max-width: 500px;
+      margin: 0 auto;
+      background: var(--white);
+      padding: 40px;
+      border-radius: 10px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .signup-section h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: var(--dark);
+    }
+    
+    .form-group {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+    
+    .form-input {
+      width: 100%;
+      padding: 15px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      font-size: 1rem;
+      transition: border 0.3s;
+    }
+    
+    .form-input:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+    
+    /* Counter */
+    .counter {
+      background: var(--primary);
+      color: white;
+      padding: 20px;
+      border-radius: 10px;
+      margin: 30px auto;
+      max-width: 400px;
+      font-size: 1.2rem;
+    }
+    
+    .counter-number {
+      font-size: 2rem;
+      font-weight: bold;
+      margin: 0 5px;
+    }
+    
+    /* Testimonials */
+    .testimonials {
+      padding: 60px 0;
+      background: var(--light);
+    }
+    
+    .testimonial-card {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      margin: 20px;
+      max-width: 500px;
+    }
+    
+    .testimonial-text {
+      font-style: italic;
+      margin-bottom: 15px;
+    }
+    
+    .testimonial-author {
+      font-weight: bold;
+      color: var(--primary);
+    }
+    
+    /* Footer */
+    .footer {
+      padding: 30px 0;
+      text-align: center;
+      background: var(--dark);
+      color: var(--white);
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+      
+      .hero p {
+        font-size: 1rem;
+      }
+      
+      .features {
+        padding: 60px 0;
+      }
+      
+      .signup-container {
+        padding: 30px 20px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Шапка -->
-    <header>
-        <div class="container">
-            <nav>
-                <div class="logo">
-                    <div class="logo-circle">C</div>
-                    <span>Cleango</span>
-                </div>
-                <div class="nav-links">
-                    <a href="#features">Возможности</a>
-                    <a href="#how-it-works">Как работает</a>
-                    <a href="#pricing">Тарифы</a>
-                    <a href="#contact">Контакты</a>
-                </div>
-                <a href="#form" class="cta-button">Попробовать бесплатно</a>
-            </nav>
-        </div>
-    </header>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container">
+      <h1>D&D с ИИ-мастером</h1>
+      <p>Ваш персональный ведущий для настольных RPG. Играйте когда угодно, без поиска живого мастера!</p>
+      <a href="#signup" class="cta-button">Начать играть</a>
+    </div>
+  </section>
 
-    <!-- Герой -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Управляйте заказами без хаоса</h1>
-                <p>CRM, которая за 5 минут наведёт порядок в ваших заказах, деньгах и напоминаниях. Больше никаких пропущенных клиентов и потерянных денег.</p>
-                <a href="#form" class="cta-button">Попробовать 14 дней бесплатно →</a>
-            </div>
-            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Интерфейс CRM" class="hero-image">
+  <!-- Features -->
+  <section class="features">
+    <div class="container">
+      <h2>Почему это круто?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">🕒</div>
+          <h3>Играйте в любое время</h3>
+          <p>Не нужно ждать, пока соберется вся группа — ИИ-мастер всегда готов к игре</p>
         </div>
-    </section>
+        <div class="feature-card">
+          <div class="feature-icon">🎲</div>
+          <h3>Автоматические расчеты</h3>
+          <p>Броски кубиков, подсчет урона и модификаторов — все автоматически</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🧙</div>
+          <h3>Персонализированные сюжеты</h3>
+          <p>ИИ адаптирует историю под ваши действия и предпочтения</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Преимущества -->
-    <section class="benefits" id="features">
-        <div class="container">
-            <h2 class="section-title">Почему выбирают Cleango</h2>
-            <div class="benefits-grid">
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                        </svg>
-                    </div>
-                    <h3>Все заказы в одном месте</h3>
-                    <p>Больше никаких пропущенных сообщений в WhatsApp и Telegram. Все заявки сохраняются в системе.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <h3>Автонапоминания клиентам</h3>
-                    <p>CRM сама напоминает клиентам о записи за 24 часа. Снижаете количество отмен на 30%.</p>
-                </div>
-                <div class="benefit-card">
-                    <div class="benefit-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                    </div>
-                    <h3>Контроль денег</h3>
-                    <p>Видите, кто заплатил, а кто нет — в одном окне. Больше никаких кассовых разрывов.</p>
-                </div>
-            </div>
+  <!-- Testimonials -->
+  <section class="testimonials">
+    <div class="container">
+      <h2 style="text-align: center; margin-bottom: 40px;">Что говорят игроки</h2>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center;">
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Лучший способ играть в D&D, когда не можешь собрать группу. ИИ-мастер действительно понимает, что происходит в игре!"</p>
+          <p class="testimonial-author">— Алексей, Москва</p>
         </div>
-    </section>
+        <div class="testimonial-card">
+          <p class="testimonial-text">"Удивительно, насколько хорошо ИИ справляется с ролью мастера. Сюжеты интересные, а мир действительно живой!"</p>
+          <p class="testimonial-author">— Мария, Санкт-Петербург</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    <!-- Как это работает -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <h2 class="section-title">Как это работает</h2>
-            <div class="steps">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <div class="step-content">
-                        <h3>Клиент оставляет заявку</h3>
-                        <p>Клиент пишет в Telegram-бот или чат компании: "Нужна уборка завтра в 15:00". Бот задаёт уточняющие вопросы (адрес, площадь).</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <div class="step-content">
-                        <h3>Заявка попадает в CRM</h3>
-                        <p>Данные автоматически сохраняются в системе: имя и телефон клиента, дата и время уборки, детали заказа. Владелец видит заказ в общем списке.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <div class="step-content">
-                        <h3>CRM напоминает клиенту</h3>
-                        <p>За 24 часа система отправляет сообщение: "Напоминаем о записи на завтра в 15:00!". Это снижает количество отмен на 30%.</p>
-                    </div>
-                </div>
-                <div class="step">
-                    <div class="step-number">4</div>
-                    <div class="step-content">
-                        <h3>Вы контролируете деньги</h3>
-                        <p>В CRM отображаются: оплаченные заказы, долги, выручка за день. Больше никаких кассовых разрывов!</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Counter -->
+  <div class="counter">
+    <div class="container">
+      <p>Уже <span class="counter-number" id="user-counter">1247</span> игроков зарегистрировались</p>
+    </div>
+  </div>
 
-    <!-- Тарифы -->
-    <section class="pricing" id="pricing">
-        <div class="container">
-            <h2 class="section-title">Тарифы</h2>
-            <div class="pricing-grid">
-                <div class="pricing-card">
-                    <h3>Стартовый</h3>
-                    <div class="price">0 ₽ <span>/ 14 дней</span></div>
-                    <ul class="pricing-features">
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            До 50 заказов
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            Базовые уведомления
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            Поддержка по email
-                        </li>
-                    </ul>
-                    <a href="#form" class="cta-button">Начать тест</a>
-                </div>
-                <div class="pricing-card popular">
-                    <div class="popular-badge">Популярный</div>
-                    <h3>Базовый</h3>
-                    <div class="price">1 500 ₽ <span>/ месяц</span></div>
-                    <ul class="pricing-features">
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            Неограниченные заказы
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            Telegram-бот
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            Финансовые отчёты
-                        </li>
-                        <li>
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-                            </svg>
-                            Приоритетная поддержка
-                        </li>
-                    </ul>
-                    <a href="#form" class="cta-button">Оформить подписку</a>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- Signup Form -->
+  <section class="signup-section" id="signup">
+    <div class="container">
+      <div class="signup-container">
+        <h2>Начните играть</h2>
+        <!-- FormSubmit Form -->
+        <form 
+          action="https://formsubmit.co/hitryievrei@gmail.com" 
+          method="POST"
+          id="signup-form"
+        >
+          <input type="hidden" name="_subject" value="Новая заявка с лендинга D&D">
+          <input type="hidden" name="_autoresponse" value="Спасибо за интерес к D&D с ИИ-мастером! Мы сообщим вам о запуске.">
+          
+          <div class="form-group">
+            <input 
+              type="email" 
+              class="form-input" 
+              placeholder="Ваш email" 
+              name="email"
+              required
+            >
+          </div>
+          
+          <button type="submit" class="cta-button">Зарегистрироваться</button>
+        </form>
+      </div>
+    </div>
+  </section>
 
-    <!-- CTA форма -->
-   <section class="cta-section" id="contact">
-        <div class="container">
-            <h2>Готовы навести порядок в заказах?</h2>
-            <p>Оставьте заявку и получите 14 дней бесплатного доступа к CRM.</p>
-            <div class="cta-form" id="form">
-                <form action="https://formsubmit.co/hitryievrei@gmail.com" method="POST">
-                    <!-- Настройки FormSubmit -->
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_subject" value="Новая заявка с лендинга!">
-                    <input type="hidden" name="_template" value="table">
-                    <input type="hidden" name="_next" value="https://jralg.github.io/crm/thank-you.html">
-                    
-                    <!-- Поля формы -->
-                    <div class="form-group">
-                        <label for="name">Ваше имя*</label>
-                        <input type="text" id="name" name="name" placeholder="Иван Иванов" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="email">Email*</label>
-                        <input type="email" id="email" name="email" placeholder="ivan@example.com" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="phone">Телефон*</label>
-                        <input type="tel" id="phone" name="phone" placeholder="+7 (999) 123-45-67" required>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="business">Укажите, что у вас за бизнес (необязательно)</label>
-                        <input type="text" id="business" name="business" placeholder="Например: клининговая компания, ремонт квартир">
-                    </div>
-                    
-                    <button type="submit" class="submit-button">Попробовать бесплатно</button>
-                </form>
-            </div>
-        </div>
-    </section>
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p>© 2023 D&D с ИИ-мастером. Все права защищены.</p>
+    </div>
+  </footer>
 
-    <!-- Подвал -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Cleango</h3>
-                    <p>CRM для клининга и услуг. Наведите порядок в заказах за 5 минут.</p>
-                </div>
-                <div class="footer-column">
-                    <h3>Меню</h3>
-                    <ul>
-                        <li><a href="#features">Возможности</a></li>
-                        <li><a href="#how-it-works">Как работает</a></li>
-                        <li><a href="#pricing">Тарифы</a></li>
-                        <li><a href="#contact">Контакты</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Контакты</h3>
-                    <ul>
-                        <li>Email: info@cleango.ru</li>
-                        <li>Телефон: +7 (999) 123-45-67</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                © 2023 Cleango. Все права защищены.
-            </div>
-        </div>
-    </footer>
+  <script>
+    // Плавная прокрутка для всех ссылок
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        document.querySelector(this.getAttribute('href')).scrollIntoView({
+          behavior: 'smooth'
+        });
+      });
+    });
+    // Анимированный счетчик
+    function animateCounter() {
+      const counter = document.getElementById('user-counter');
+      const target = 1247;
+      let current = 0;
+      const increment = target / 50;
+      
+      const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+          clearInterval(timer);
+          current = target;
+        }
+        counter.textContent = Math.floor(current);
+      }, 20);
+    }
+    
+    // Запускаем анимацию при загрузке
+    window.addEventListener('load', animateCounter);
+  </script>
 </body>
 </html>
